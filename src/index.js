@@ -1,22 +1,11 @@
+//Импорт библиотек
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-const TodoList = () => {
-	return (
-		<ul>
-			<li>Learn React</li>
-			<li>Build Awesome App</li>
-		</ul>
-	)
-}
-
-const AppHeader = () => {
-	return <h1> My Todo list </h1>;
-}
-
-const SearchPanel = () => {
-	return <input placeholder = 'search' />;
-}
+//Импорт модулей
+import TodoList from './components/todo-list';
+import AppHeader from './components/app-header';
+import SearchPanel from './components/search-panel';
 
 const App = () => {
 	return (
