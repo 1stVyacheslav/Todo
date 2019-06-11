@@ -1,18 +1,23 @@
-import React from 'react';
+import React, { Component } from 'react';
 
 import './add-item.css'
 
-const AddItem = () => {
-	return (
+export default class AddItem extends Component {
+
+	
+	
+	render() {
+
+		const { onAdded } = this.props;
+
+		return (
 		
 			<div className='add-item d-flex'>
 				<input type='text' className='add-item-input form-control' placeholder='Add Item' />
-				<button type='button' className='btn btn-primary'>Add Item</button>				
-			</div>
+				<button type='button' className='btn btn-primary' onClick={ onAdded }>Add Item</button>				
+			</div>		
+		)
+	}
+	
 
-		
-		
-	)
 };
-
-export default AddItem;

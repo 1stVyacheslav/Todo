@@ -43,7 +43,7 @@ export default class App extends Component {
 				</div>
 				
 				<TodoList todos={ this.state.toDoData } onDeleted={ this.deleteItem } />
-				<AddItem />
+				<AddItem onAdded={ () => console.log('Item added!') }/>
 			</div>
 		)
 	}
