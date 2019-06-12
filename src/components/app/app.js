@@ -12,6 +12,8 @@ import './app.css';
 
 export default class App extends Component {
 
+	maxId =100;
+
 	state = {
 		toDoData: [
 			{label: 'Drink Coffee', important: false, id: 0},
@@ -26,11 +28,27 @@ export default class App extends Component {
 			const index = toDoData.findIndex( (el) => el.id === id )
 			
 			const newArray = [
-				...toDoData.slice(0, index),							...toDoData.slice(index+1)
+				...toDoData.slice(0, index),
+				...toDoData.slice(index+1)
 			];
 
 			return {toDoData: newArray};
 		} )
+	};
+
+	addItem = (text) => {
+		
+		const newItem = {
+			label: text,
+			important: false,
+			id: this.maxId++
+		};
+
+		this.setState( ({toDoData}) => {
+			const newArray = [...toDoData, newItem];
+
+			return {toDoData: newArray};
+		})
 	};
 
 	render() {
@@ -43,7 +61,7 @@ export default class App extends Component {
 				</div>
 				
 				<TodoList todos={ this.state.toDoData } onDeleted={ this.deleteItem } />
-				<ItemAddForm />
+				<ItemAddForm onItemAdded={ this.addItem }/>
 			</div>
 		)
 	}
