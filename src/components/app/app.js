@@ -103,6 +103,10 @@ export default class App extends Component {
 		})
 	}
 
+	changeFilter = (text) => {
+		console.log(text)
+	}
+
 	render() {
 
 		const { toDoData } = this.state,
@@ -120,7 +124,8 @@ export default class App extends Component {
 				<div className='top-panel d-flex'>
 					<SearchPanel 
 						onChangeSearch={this.search}/>
-					<ItemStatusFilter />
+					<ItemStatusFilter 
+						onChangeFilter={this.changeFilter}/>
 				</div>
 				
 				<TodoList 
