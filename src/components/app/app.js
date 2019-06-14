@@ -19,6 +19,7 @@ export default class App extends Component {
 			label: label,
 			important: false,
 			done: false,
+			disabled: false,
 			id: this.maxId++
 
 		}
@@ -94,10 +95,11 @@ export default class App extends Component {
 	search = (text) => {
 		
 		this.setState( ({ toDoData }) => {
-			const newArray = this.state.toDoData.filter( (el) => {
-				return el.label
+			const newArray = toDoData.map( (el) => {
+				return el.disabled = el.label
 									.toLowerCase()
-									.indexOf(text.toLowerCase()) >= 0}
+									.indexOf(text.toLowerCase()) >= 0 ? false : true;
+								}
 			);
 			return { toDoData: newArray	}
 		})
