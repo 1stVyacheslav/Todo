@@ -137,7 +137,10 @@ export default class App extends Component {
 			<div className='todo-app'>
 				<AppHeader toDo={toDoCount} done={doneCount}/>
 				<div className='top-panel d-flex'>
-					<SearchPanel onSearchChange={this.onSearchChange}/>
+					<SearchPanel 
+							onSearchChange={this.onSearchChange}
+							term={this.state.term}
+					/>
 					<ItemStatusFilter 
 							filter={filter}
 							onFilterChange={this.onFilterChange}
