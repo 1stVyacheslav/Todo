@@ -96,8 +96,15 @@ export default class App extends Component {
 	searchItems = (text) => {
 		
 		this.setState( ({ toDoData }) => {
+
 			const newArray = toDoData.map( (el) => {
-				el.hidden = (el.label.toLowerCase().indexOf(text.toLowerCase()) >= 0) ? false : true;
+
+				if (this.state.filter === '_active' && el.done) return el;
+				if (this.state.filter === '_done' && !el.done) return el;
+				el.hidden = (el.label
+					.toLowerCase()
+					.indexOf(text.toLowerCase()) >= 0) ? false : true;
+
 				return el;
 				}
 			);
@@ -171,7 +178,8 @@ export default class App extends Component {
 					<SearchPanel 
 						onChangeSearch={this.searchItems}/>
 					<ItemStatusFilter 
-						onChangeFilter={this.changeFilter}/>
+						
+						onChangeFilter={ this.changeFilter }/>
 				</div>
 				
 				<TodoList 
