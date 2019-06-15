@@ -7,12 +7,9 @@ import './todo-list.css';
 const TodoList = ({todos, onDeleted, onToggleImportant, onToggleDone}) => {
 	const elements = todos.map( (item) => {
 		const { id, hidden, ...itemProps } = item;
-		let classNames = 'list-group-item'
-		if (hidden) {
-			classNames += ' d-none';
-		}
-		return (
-		<li className={classNames} key={id}>
+		
+		return hidden ? null : (
+		<li className='list-group-item' key={id}>
 			<TodoListItem 
 				{...itemProps} 
 				onDeleted={ () => onDeleted(id) }
@@ -21,7 +18,7 @@ const TodoList = ({todos, onDeleted, onToggleImportant, onToggleDone}) => {
 			/>
 		</li>
 		)
-});
+	});
 
 	return (
 		<ul className='list-group todo-list'> 

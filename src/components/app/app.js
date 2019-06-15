@@ -31,7 +31,8 @@ export default class App extends Component {
 			this.createTodoItem('Make Awesome App'),
 			this.createTodoItem('Have a lunch')
 		],
-		filter: '_all'
+		filter: '_all',
+		searchString: ''
 	};
 
 
@@ -101,15 +102,18 @@ export default class App extends Component {
 
 				if (this.state.filter === '_active' && el.done) return el;
 				if (this.state.filter === '_done' && !el.done) return el;
-				el.hidden = (el.label
+				el.hidden = ( el.label
 					.toLowerCase()
-					.indexOf(text.toLowerCase()) >= 0) ? false : true;
+					.includes(text.toLowerCase()) ) ? false : true;
 
 				return el;
 				}
 			);
 			
-			return { toDoData: newArray	}
+			return { 
+				toDoData: newArray,
+				searchString: text			
+			}
 		})
 	}
 
@@ -162,7 +166,7 @@ export default class App extends Component {
 
 	render() {
 
-		const { toDoData } = this.state,
+		const { toDoData, searchString } = this.state,
 					doneCount = toDoData
 													.filter( (el) => el.done )
 													.length,
@@ -176,9 +180,9 @@ export default class App extends Component {
 				/>
 				<div className='top-panel d-flex' >
 					<SearchPanel 
+						searchString={searchString}
 						onChangeSearch={this.searchItems}/>
-					<ItemStatusFilter 
-						
+					<ItemStatusFilter						
 						onChangeFilter={ this.changeFilter }/>
 				</div>
 				
