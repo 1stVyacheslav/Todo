@@ -15,7 +15,7 @@ const TodoListItem = ( { label, onDeleted, onToggleImportant, onToggleDone, impo
 		}
 	
 		return (
-			<span className={  classNames }>
+			<span className={  classNames } >
 				<span className='todo-list-item-label' onClick={ onToggleDone }>
 					{ label }
 				</span>

@@ -19,7 +19,7 @@ export default class App extends Component {
 			label: label,
 			important: false,
 			done: false,
-			disabled: false,
+			hidden: false,
 			id: this.maxId++
 
 		}
@@ -92,15 +92,15 @@ export default class App extends Component {
 		} )
 	};
 
-	search = (text) => {
+	searchItems = (text) => {
 		
 		this.setState( ({ toDoData }) => {
 			const newArray = toDoData.map( (el) => {
-				return el.disabled = el.label
-									.toLowerCase()
-									.indexOf(text.toLowerCase()) >= 0 ? false : true;
-								}
+				el.hidden = (el.label.toLowerCase().indexOf(text.toLowerCase()) >= 0) ? false : true;
+				return el;
+				}
 			);
+			
 			return { toDoData: newArray	}
 		})
 	}
@@ -123,9 +123,9 @@ export default class App extends Component {
 					toDo={toDoCount} 
 					done={doneCount}
 				/>
-				<div className='top-panel d-flex'>
+				<div className='top-panel d-flex' >
 					<SearchPanel 
-						onChangeSearch={this.search}/>
+						onChangeSearch={this.searchItems}/>
 					<ItemStatusFilter 
 						onChangeFilter={this.changeFilter}/>
 				</div>
