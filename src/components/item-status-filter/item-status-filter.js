@@ -9,16 +9,19 @@ export default class ItemStatusFilter extends Component {
 	}
 
 	changeFilter = (e) => {
-		// console.log(e.target.className)
-		this.props.onChangeFilter(e.target.className)
+
+		const obj = e.target,
+					trgtClass = obj.className.split(' ')[0];
+
+		this.props.onChangeFilter(trgtClass)
 	}
 
 	render() {
 		return (
 			<div className='btn-group' onClick={this.changeFilter}>
-				<button type='button' className='btn btn-info _all'>All</button>
-				<button type='button' className='btn btn-outline-secondary _active'>Active</button>
-				<button type='button' className='btn btn-outline-secondary _done'>Done</button>
+				<button type='button' className='_all btn btn-info'>All</button>
+				<button type='button' className='_active btn btn-outline-secondary'>Active</button>
+				<button type='button' className='_done btn btn-outline-secondary'>Done</button>
 			</div>
 		)
 	}

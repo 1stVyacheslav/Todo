@@ -30,7 +30,8 @@ export default class App extends Component {
 			this.createTodoItem('Drink Coffee'),
 			this.createTodoItem('Make Awesome App'),
 			this.createTodoItem('Have a lunch')
-		]
+		],
+		filter: '_all'
 	};
 
 
@@ -106,7 +107,50 @@ export default class App extends Component {
 	}
 
 	changeFilter = (text) => {
-		console.log(text)
+	
+		switch (text) {
+			case '_active':
+				this.setState( ({ toDoData }) => {
+					const newArray = toDoData.map( (el) => {
+						el.hidden = el.done;
+						return el;
+						}
+					);
+					
+					return { 
+						toDoData: newArray,
+						filter: text
+						}
+				});
+				break;
+			case '_done':
+				this.setState( ({ toDoData }) => {
+					const newArray = toDoData.map( (el) => {
+						el.hidden = !el.done;
+						return el;
+						}
+					);
+						
+					return { 
+						toDoData: newArray,
+						filter: text
+						}
+				});
+				break;
+			default:
+				this.setState( ({ toDoData }) => {
+					const newArray = toDoData.map( (el) => {
+						el.hidden = false;
+						return el;
+						}
+					);
+							
+					return { 
+						toDoData: newArray,
+						filter: text
+						}
+				});
+		}
 	}
 
 	render() {
