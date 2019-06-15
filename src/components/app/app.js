@@ -54,6 +54,10 @@ export default class App extends Component {
 		
 		const newItem = this.createTodoItem(text);
 
+		if (this.state.searchString !== '') {
+			newItem.hidden = !newItem.label.toLowerCase().includes(this.state.searchString)
+		}
+
 		this.setState( ({toDoData}) => {
 			const newArray = [...toDoData, newItem];
 
@@ -102,9 +106,7 @@ export default class App extends Component {
 
 				if (this.state.filter === '_active' && el.done) return el;
 				if (this.state.filter === '_done' && !el.done) return el;
-				el.hidden = ( el.label
-					.toLowerCase()
-					.includes(text.toLowerCase()) ) ? false : true;
+				el.hidden = !el.label.toLowerCase().includes(text.toLowerCase());
 
 				return el;
 				}
@@ -170,7 +172,8 @@ export default class App extends Component {
 					doneCount = toDoData
 													.filter( (el) => el.done )
 													.length,
-					toDoCount = toDoData.length - doneCount;
+					toDoCount = toDoData.length - doneCount,
+					visibleItems = toDoData.filter( (el) => !el.hidden);
 
 		return (
 			<div className='todo-app'>
@@ -187,7 +190,7 @@ export default class App extends Component {
 				</div>
 				
 				<TodoList 
-					todos={ this.state.toDoData }
+					todos={ visibleItems }
 					onDeleted={ this.deleteItem }
 					onToggleImportant={this.onToggleImportant}
 					onToggleDone={this.onToggleDone}
